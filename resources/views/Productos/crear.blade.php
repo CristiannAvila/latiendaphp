@@ -30,8 +30,22 @@
         </div>
       </div>
       <div class="row">
+        <div class="col s8 input-field">
+          <select name="marca" id="marca">
+            <option>
+              Elija su marca
+            </option>
+            <option>
+              @foreach($marcas as $marca)
+              <option>{{  $marca->nombre }}</option>
+              @endforeach
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
       <div class="file-field input-field">
-      <div class="btn">
+      <div class="waves-effect waves-light btn blue text-darken-2">
         <span>Ingrese imagen...</span>
         <input type="file">
       </div>
