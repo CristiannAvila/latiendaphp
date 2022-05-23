@@ -1,7 +1,10 @@
 @extends('layouts.principal')
 
 @section('contenido')
-    <form class="col s8">
+    <form class="col s8" 
+      method="POST" 
+      action="{{ Route('productos.store') }}">
+    @csrf
       <div class="row">
           <div class="col s8">
               <h1 class="blue-text text-darken-2">
@@ -10,8 +13,12 @@
           </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Nombre del producto" id="nombre" type="text" class="validate">
+        <div class="input-field col s6"> 
+          <input placeholder="Nombre del producto" 
+          id="nombre" 
+          type="text" 
+          class="validate" 
+          name="nombre">
           <label for="nombre">Nombre</label>
         </div>
       </div>
@@ -19,13 +26,17 @@
         <div class="input-field col s8">
           <input id="desc" 
           type="text"
-           class="validate">
+           class="validate"
+           name="desc">
           <label for="desc">Descripcion</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s8">
-          <input id="precio" type="number" class="validate">
+          <input id="precio" 
+          type="number"
+           class="validate" 
+           name="precio">
           <label for="precio">Precio</label>
         </div>
       </div>
@@ -37,9 +48,25 @@
             </option>
             <option>
               @foreach($marcas as $marca)
-              <option>{{  $marca->nombre }}</option>
+              <option value="{{$marca->id}}">
+                {{  $marca->nombre }}
+              </option>
               @endforeach
             </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s8 input-field">
+          <select name="categoria" id="categoria">
+            <option>
+              Elija su categoria
+            </option>
+            @foreach($categorias as $categoria)
+              <option value="{{$categoria->id}}">
+                {{$categoria->nombre}}
+              </option>
+            @endforeach
           </select>
         </div>
       </div>
@@ -55,9 +82,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12">
-        <a class="waves-effect waves-light btn blue text-darken-2">Guardar</a>
-        </div>
+      <button class="btn waves-effect waves-light blue text-darken-2" type="submit" name="action">
+       Guardar  
+      </button>
       </div>
     </form>
   @endsection
